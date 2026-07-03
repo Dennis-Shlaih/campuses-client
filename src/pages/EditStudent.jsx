@@ -1,10 +1,11 @@
-//this page is a form of add student. 
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { createStudent } from "../api/students";
+//file for editing a student. fetches data from the backend and allows the user to edit students information. 
+import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchStudent, updateStudent } from "../api/students";
 
-function AddStudent() {
+function EditStudent() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -17,11 +18,30 @@ function AddStudent() {
     campusId: "",
   });
 
+  const { data: student, isLoading, isError, error } = useQuery({
+    queryKey: ["student", id],
+    queryFn: () => fetchStudent(id),
+  });
+
+  useEffect(() => {
+    if (student) {
+      setFormData({
+        firstName: student.firstName || "",
+        lastName: student.lastName || "",
+        email: student.email || "",
+        imageUrl: student.imageUrl || "",
+        gpa: student.gpa || "",
+        campusId: student.campusId || "",
+      });
+    }
+  }, [student]);
+
   const mutation = useMutation({
-    mutationFn: createStudent,
+    mutationFn: (updatedStudent) => updateStudent(id, updatedStudent),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["students"] });
-      navigate("/students");
+      queryClient.invalidateQueries({ queryKey: ["student", id] });
+      navigate(`/students/${id}`);
     },
   });
 
@@ -29,37 +49,40 @@ function AddStudent() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function validateForm() {
-    if (!formData.firstName || !formData.lastName || !formData.email) {
-      alert("First name, last name, and email are required.");
-      return false;
-    }
-
-    const gpa = Number(formData.gpa);
-    if (Number.isNaN(gpa) || gpa < 0 || gpa > 4) {
-      alert("GPA must be between 0.0 and 4.0.");
-      return false;
-    }
-
-    return true;
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-    if (!validateForm()) return;
+
+    const gpa = Number(formData.gpa);
+    if (!formData.firstName || !formData.lastName || !formData.email) {
+      alert("First name, last name, and email are required.");
+      return;
+    }
+
+    if (Number.isNaN(gpa) || gpa < 0 || gpa > 4) {
+      alert("GPA must be between 0.0 and 4.0.");
+      return;
+    }
 
     mutation.mutate({
       ...formData,
-      gpa: Number(formData.gpa),
+      gpa,
       campusId: formData.campusId ? Number(formData.campusId) : null,
-      imageUrl:
-        formData.imageUrl || "https://placehold.co/150x150?text=Student",
     });
+  }
+
+  if (isLoading) return <p className="text-center">Loading student...</p>;
+
+  if (isError) {
+    return (
+      <p className="text-center text-red-600">
+        Error loading student: {error.message}
+      </p>
+    );
   }
 
   return (
     <section className="max-w-3xl mx-auto bg-white p-8 rounded shadow">
-      <h1 className="text-3xl font-bold mb-6">Add Student</h1>
+      <h1 className="text-3xl font-bold mb-6">Edit Student</h1>
 
       <form onSubmit={handleSubmit} className="grid gap-4">
         <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} className="border p-2 rounded" />
@@ -75,8 +98,8 @@ function AddStudent() {
           <option value="3">Queens College</option>
         </select>
 
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          {mutation.isPending ? "Adding..." : "Add Student"}
+        <button className="bg-yellow-500 text-white px-4 py-2 rounded">
+          {mutation.isPending ? "Saving..." : "Save Changes"}
         </button>
 
         {mutation.isError && (
@@ -87,4 +110,4 @@ function AddStudent() {
   );
 }
 
-export default AddStudent;
+export default EditStudent;
