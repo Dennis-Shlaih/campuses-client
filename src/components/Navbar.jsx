@@ -2,11 +2,16 @@
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
+  const linkStyle = ({ isActive }) =>
+    isActive
+      ? "text-blue-600 font-bold underline"
+      : "text-gray-700 hover:text-blue-600";
+
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>{" | "}
-      <NavLink to="/students">Students</NavLink>{" | "}
-      <NavLink to="/students/add">Add Student</NavLink>
+    <nav className="bg-white shadow p-4 flex gap-6">
+      <NavLink to="/" className={linkStyle}>Home</NavLink>
+      <NavLink to="/students" className={linkStyle}>Students</NavLink>
+      <NavLink to="/students/add" className={linkStyle}>Add Student</NavLink>
     </nav>
   );
 }

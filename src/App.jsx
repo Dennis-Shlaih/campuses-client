@@ -13,13 +13,15 @@ function App() {
     <BrowserRouter>
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/students/:id" element={<Student />} />
-        <Route path="/students/add" element={<AddStudent />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <main className="min-h-screen bg-gray-100 p-6">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/students/:id" element={<Student />} />
+          <Route path="/students/add" element={<AddStudent />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }
