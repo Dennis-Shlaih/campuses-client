@@ -1,20 +1,20 @@
 //populated some dummy data for students and displays them in a list. Each student has a link to their own page. 
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStudents } from "../api/students";
+import { getStudents } from "../api/students";
 import useUiStore from "../store/useUiStore";
 
 function Students() {
   const { showUnenrolledOnly, toggleUnenrolledOnly } = useUiStore();
 
   const {
-    data: students = [],
+    data,
     isLoading,
     isError,
     error,
   } = useQuery({
     queryKey: ["students"],
-    queryFn: fetchStudents,
+    queryFn: getStudents,
   });
 
   if (isLoading) return <p className="text-center">Loading students...</p>;
@@ -28,8 +28,8 @@ function Students() {
   }
 
   const filteredStudents = showUnenrolledOnly
-    ? students.filter((student) => !student.campusId && !student.campus)
-    : students;
+    ? data.filter((student) => !student.campusId && !student.campus)
+    : data;
 
   return (
     <section className="max-w-5xl mx-auto">
@@ -60,7 +60,7 @@ function Students() {
           {filteredStudents.map((student) => (
             <div key={student.id} className="bg-white p-4 rounded shadow flex gap-4">
               <img
-                src={student.imageUrl || "https://placehold.co/150x150?text=Student"}
+                src={student.imageUrl}
                 alt={`${student.firstName} ${student.lastName}`}
                 className="w-24 h-24 rounded object-cover"
               />

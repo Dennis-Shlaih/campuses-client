@@ -1,7 +1,7 @@
 //This page displays a list of students with some dummy data. Each student has a link to their own page.
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteStudent, fetchStudent } from "../api/students";
+import { deleteStudent, getStudent } from "../api/students";
 
 function Student() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ function Student() {
     error,
   } = useQuery({
     queryKey: ["student", id],
-    queryFn: () => fetchStudent(id),
+    queryFn: () => getStudent(id),
   });
 
   const deleteMutation = useMutation({
