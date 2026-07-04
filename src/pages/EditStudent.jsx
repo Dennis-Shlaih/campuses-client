@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchStudent, updateStudent } from "../api/students";
+import { getStudent, updateStudent } from "../api/students";
 
 function EditStudent() {
   const { id } = useParams();
@@ -20,7 +20,7 @@ function EditStudent() {
 
   const { data: student, isLoading, isError, error } = useQuery({
     queryKey: ["student", id],
-    queryFn: () => fetchStudent(id),
+    queryFn: () => getStudent(id),
   });
 
   useEffect(() => {

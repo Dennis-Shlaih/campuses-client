@@ -1,7 +1,7 @@
 //populated some dummy data for students and displays them in a list. Each student has a link to their own page. 
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchStudents } from "../api/students";
+import { getStudents } from "../api/students";
 import useUiStore from "../store/useUiStore";
 
 function Students() {
@@ -14,7 +14,7 @@ function Students() {
     error,
   } = useQuery({
     queryKey: ["students"],
-    queryFn: fetchStudents,
+    queryFn: getStudents,
   });
 
   if (isLoading) return <p className="text-center">Loading students...</p>;
