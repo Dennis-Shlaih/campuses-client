@@ -8,6 +8,10 @@ import Student from "./pages/Student";
 import AddStudent from "./pages/AddStudent";
 import EditStudent from "./pages/EditStudent";
 import NotFound from "./pages/NotFound";
+import AllCampuses from "./pages/AllCampuses";
+import CampusDetails from "./pages/CampusDetails";
+import AddCampus from "./pages/AddCampus";
+import EditCampus from "./pages/EditCampus";
 
 function App() {
   return (
@@ -20,6 +24,10 @@ function App() {
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/:id" element={<Student />} />
           <Route path="/students/:id/edit" element={<EditStudent />} />
+          <Route path="/campuses" element={<AllCampuses/>}/>
+          <Route path="/campuses/add"element={<AddCampus/>}/>
+          <Route path="/campuses/:id"element={<CampusDetails/>}/>
+          <Route path="/campuses/:id/edit"element={<EditCampus/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

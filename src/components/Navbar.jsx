@@ -12,6 +12,8 @@ function Navbar() {
       <NavLink to="/" className={linkStyle}>Home</NavLink>
       <NavLink to="/students" className={linkStyle}>Students</NavLink>
       <NavLink to="/students/add" className={linkStyle}>Add Student</NavLink>
+      <NavLink to="/campuses" className={linkStyle}>Campuses</NavLink>
+      <NavLink to="/campuses/add" className={linkStyle}>Add Campus</NavLink>
     </nav>
   );
 }

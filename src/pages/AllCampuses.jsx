@@ -1,15 +1,15 @@
 import {Link} from "react-router-dom"
 import {useQuery} from "@tanstack/react-query"
 import {getCampuses} from "../api/campuses.js"
-import useAppStore from "../store.js"
+import useUiStore from "../store/useUiStore.js"
 import Loading from "../components/Loading.jsx"
 import ErrorMessage from "../components/ErrorMessage.jsx"
 
 const fallBackImage = "https://placehold.co/600x400?text=Campus"
 
-function Allcampuses(){
-    const campusSearch = useAppStore((state) => state.campusSearch)
-    const setCampusSearch = useAppStore((state) => state.setCampusSearch)
+function AllCampuses(){
+    const campusSearch = useUiStore((state) => state.campusSearch)
+    const setCampusSearch = useUiStore((state) => state.setCampusSearch)
     const {data: campuses = [], isLoading, isError, error} = useQuery({
         queryKey: ["campuses"],
         queryFn: getCampuses,
@@ -22,7 +22,7 @@ function Allcampuses(){
         <section><div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div> <h1 className="text-3xl font-bold">All Campuses</h1>
             <p className="text-slate-600">Browse every campus in the database.</p></div>
-            <Link className="rounded-md bg-blue-600 px-4 py-2 text-white" to="/campuses/new">Add Campus</Link></div>
+            <Link className="rounded-md bg-blue-600 px-4 py-2 text-white" to="/campuses/add">Add Campus</Link></div>
             
             <input className="mb-6 w-full rounded-md border bg-white p-3" value={campusSearch} onChange={(event)=> setCampusSearch(event.target.value)} placeholder="Search campuses by name..."/> 
             {filteredCampuses.length ===0?(
@@ -41,4 +41,4 @@ function Allcampuses(){
                 </section>
     )
 }
-export default Allcampuses
+export default AllCampuses

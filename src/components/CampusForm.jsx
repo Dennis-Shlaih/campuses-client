@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function campusForm({initialCampus, onSubmit, submitText}){
+function CampusForm({initialCampus, onSubmit, submitText}){
     const [name, setname] = useState(initialCampus?.name || "")
     const [address, setAddress] = useState(initialCampus?.address || "")
     const [imageUrl, setImageURL] = useState(initialCampus?.imageUrl || "")
@@ -46,4 +46,4 @@ function campusForm({initialCampus, onSubmit, submitText}){
 
 }
 
-export default campusForm
+export default CampusForm

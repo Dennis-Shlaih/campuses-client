@@ -1,12 +1,13 @@
 import {Link, useNavigate, useParams}from "react-router-dom"
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import {deleteCampus, getCampus, updateStudent} from "../api/campuses.js"
+import {deleteCampus, getCampus,} from "../api/campuses.js"
+import {updateStudent} from "../api/students.js"
 import Loading from "../components/Loading.jsx"
 import ErrorMessage from "../components/ErrorMessage.jsx"
 
 const fallBackImage="https://placehold.co/900x400?text=Campus"
 
-function campusDetails(){
+function CampusDetails(){
     const {id} = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
@@ -80,4 +81,4 @@ function campusDetails(){
         </div>
     </section>)
 }
-export default campusDetails
+export default CampusDetails

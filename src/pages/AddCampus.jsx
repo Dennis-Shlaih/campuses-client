@@ -4,7 +4,7 @@ import {createCampus} from "../api/campuses.js"
 import CampusForm from "../components/CampusForm.jsx"
 import ErrorMessage from "../components/ErrorMessage.jsx"
 
-function addCampus(){
+function AddCampus(){
     const navigate = useNavigate()
     const queryClient=useQueryClient()
     const mutation = useMutation({
@@ -22,4 +22,4 @@ function addCampus(){
     </section>)
 }
 
-export default addCampus
+export default AddCampus

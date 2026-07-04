@@ -5,7 +5,7 @@ import CampusForm from "../components/CampusForm.jsx"
 import Loading from "../components/Loading.jsx"
 import ErrorMessage from "../components/ErrorMessage.jsx"
 
-function editCampus(){
+function EditCampus(){
     const {id} = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
@@ -24,8 +24,8 @@ function editCampus(){
     if (isLoading)return <Loading/>
     if(isError)return <ErrorMessage message={error.message}/>
     return(
-        <section classname="mx-auto max-w-2xl">
-            <h1 classname="mb-6 text-3xl font-bold">EditCampus</h1>
+        <section className="mx-auto max-w-2xl">
+            <h1 className="mb-6 text-3xl font-bold">EditCampus</h1>
             {mutation.isError && <ErrorMessage message={mutation.error.message}/>}
             <CampusForm initialCampus={campus} onSubmit={mutation.mutate} submitText={mutation.isPending?"Saving..." : "Save Changes"}/>
         </section>
@@ -33,4 +33,4 @@ function editCampus(){
 
 }
 
-export default editCampus
+export default EditCampus
