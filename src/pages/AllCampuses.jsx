@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom"
 import {useQuery} from "@tanstack/react-query"
-import {getCampuses} from "../api/campuses.js"
+import {getAllCampuses} from "../api/campuses.js"
 import useUiStore from "../store/useUiStore.js"
 import Loading from "../components/Loading.jsx"
 import ErrorMessage from "../components/ErrorMessage.jsx"
@@ -12,7 +12,7 @@ function AllCampuses(){
     const setCampusSearch = useUiStore((state) => state.setCampusSearch)
     const {data: campuses = [], isLoading, isError, error} = useQuery({
         queryKey: ["campuses"],
-        queryFn: getCampuses,
+        queryFn: getAllCampuses,
     })
     const filteredCampuses = campuses.filter((campus)=> campus.name.toLowerCase().includes(campusSearch.toLowerCase()),)
 
