@@ -73,7 +73,7 @@ function Students() {
                 <p>GPA: {student.gpa}</p>
                 <p>
                   Campus:{" "}
-                  {student.campus?.name || student.campusName || "Not enrolled"}
+                  {student.campus?.name || "Not enrolled"}
                 </p>
 
                 <Link
