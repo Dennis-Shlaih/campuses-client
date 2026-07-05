@@ -5,6 +5,9 @@ const useUiStore = create((set) => ({
   showUnenrolledOnly: false,
   toggleUnenrolledOnly: () =>
     set((state) => ({ showUnenrolledOnly: !state.showUnenrolledOnly })),
+
+  campusSearch: "",
+    setCampusSearch:(campusSearch)=>set({campusSearch}),
 }));
 
 export default useUiStore;

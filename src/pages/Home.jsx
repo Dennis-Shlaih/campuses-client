@@ -12,6 +12,8 @@ function Home() {
       <Link to="/students" className="text-blue-600 hover:underline">
         View Students
       </Link>
+      <Link to="/campuses" className="ml-4 text-blue-600 hover:underline">View Campuses
+      </Link>
     </section>
   );
 }

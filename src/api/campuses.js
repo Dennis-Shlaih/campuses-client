@@ -1,3 +1,4 @@
+
 import client from './client'
 //This file contains functions for making API requests to the backend server for managing campuses.
 
@@ -24,3 +25,4 @@ export async function updateCampus(id, input) {
 export async function deleteCampus(id) {
   await client.delete(`/campuses/${id}`);
 };
+
