@@ -60,7 +60,7 @@ function Students() {
           {filteredStudents.map((student) => (
             <div key={student.id} className="bg-white p-4 rounded shadow flex gap-4">
               <img
-                src={student.imageUrl}
+                src={student.imageUrl || "https://placehold.co/150x150?text=Student"}
                 alt={`${student.firstName} ${student.lastName}`}
                 className="w-24 h-24 rounded object-cover"
               />
