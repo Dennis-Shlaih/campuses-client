@@ -26,8 +26,9 @@ function EditCampus(){//creates the Edit Campus function
     if(isError)return <ErrorMessage message={error.message}/> //checks if their is an error message found, if their is an error message then it prints the error message that was found in our details and caught by error and prints it here
     return(// this is the styling section, here section margins are auto width double xl title styles with 6 bmargin and triple xl size for the text bold font then a printed message 
         <section className="mx-auto max-w-2xl">
-            <h1 className="mb-6 text-3xl font-bold">EditCampus</h1>
-            {mutation.isError && <ErrorMessage message={mutation.error.message}/>}{/*if their is an error then print the message if not lets move on */}
+
+            <h1 className="mb-6 text-3xl font-bold">Edit Campus</h1>
+            {mutation.isError && <ErrorMessage message={mutation.error.message}/>} {/*if their is an error then print the message if not lets move on */}
             <CampusForm initialCampus={campus} onSubmit={mutation.mutate} submitText={mutation.isPending?"Saving..." : "Save Changes"}/> {/*here we actually participate in the updating or mutation, but first we just get the initial campus, then we mutate and also we also customize our button to say saving when clicked but not done and to have a message by default */}
         </section>
     )

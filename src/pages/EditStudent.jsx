@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudent, updateStudent } from "../api/students";
+import { getAllCampuses } from "../api/campuses";
 
 function EditStudent() {
   const { id } = useParams();
@@ -16,6 +17,11 @@ function EditStudent() {
     imageUrl: "",
     gpa: "",
     campusId: "",
+  });
+
+  const { data: campuses = [] } = useQuery({
+    queryKey: ["campuses"],
+    queryFn: getAllCampuses,
   });
 
   const { data: student, isLoading, isError, error } = useQuery({
@@ -93,9 +99,9 @@ function EditStudent() {
 
         <select name="campusId" value={formData.campusId} onChange={handleChange} className="border p-2 rounded">
           <option value="">Not enrolled</option>
-          <option value="1">Hunter College</option>
-          <option value="2">Brooklyn College</option>
-          <option value="3">Queens College</option>
+          {campuses.map((campus) => (
+            <option key={campus.id} value={campus.id}>{campus.name}</option>
+          ))}
         </select>
 
         <button className="bg-yellow-500 text-white px-4 py-2 rounded">
