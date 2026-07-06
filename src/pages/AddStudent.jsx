@@ -1,8 +1,10 @@
 //this page is a form of add student. 
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { createStudent } from "../api/students";
+import { getAllCampuses } from "../api/campuses";
+
 
 function AddStudent() {
   const navigate = useNavigate();
@@ -15,6 +17,11 @@ function AddStudent() {
     imageUrl: "",
     gpa: "",
     campusId: "",
+  });
+  
+  const { data: campuses = [] } = useQuery({
+    queryKey: ["campuses"],
+    queryFn: getAllCampuses,
   });
 
   const mutation = useMutation({
@@ -70,9 +77,9 @@ function AddStudent() {
 
         <select name="campusId" value={formData.campusId} onChange={handleChange} className="border p-2 rounded">
           <option value="">Not enrolled</option>
-          <option value="1">Hunter College</option>
-          <option value="2">Brooklyn College</option>
-          <option value="3">Queens College</option>
+          {campuses.map((campus) => (
+            <option key={campus.id} value={campus.id}>{campus.name}</option>
+          ))}
         </select>
 
         <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">

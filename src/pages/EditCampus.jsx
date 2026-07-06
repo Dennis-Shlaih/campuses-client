@@ -25,7 +25,7 @@ function EditCampus(){
     if(isError)return <ErrorMessage message={error.message}/>
     return(
         <section className="mx-auto max-w-2xl">
-            <h1 className="mb-6 text-3xl font-bold">EditCampus</h1>
+            <h1 className="mb-6 text-3xl font-bold">Edit Campus</h1>
             {mutation.isError && <ErrorMessage message={mutation.error.message}/>}
             <CampusForm initialCampus={campus} onSubmit={mutation.mutate} submitText={mutation.isPending?"Saving..." : "Save Changes"}/>
         </section>

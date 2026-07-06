@@ -1,16 +1,61 @@
-# React + Vite
+# Campuses & Students — Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend for the Campuses & Students fullstack CRUD application, built with React, Vite, TanStack Query, Zustand, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Live URL
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://campuses-client.vercel.app
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React
+- **Build Tool**: Vite
+- **Language**: JavaScript
+- **Routing**: React Router
+- **Server State**: TanStack Query
+- **Client State**: Zustand
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Deployment**: Vercel
 
-## Expanding the ESLint configuration
+## Running Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+- Node.js
+- The backend server running locally or deployed
+
+### Setup
+
+1. Clone the repo:
+```bash
+git clone https://github.com/Dennis-Shlaih/campuses-client.git
+cd campuses-client
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the project root:
+```bash
+VITE_API_URL=http://localhost:3001
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+The app will be running at `http://localhost:5173`.
+
+## Features
+
+- Full CRUD for both Campuses and Students
+- Search campuses by name (Zustand client state)
+- Filter students by unenrolled status (Zustand client state)
+- Enroll and unenroll students from the Single Campus page
+- Change a student's campus from the Edit Student page
+- Loading and error states on every fetched view
+- 404 page for unmatched routes
+- Responsive design for mobile and desktop
