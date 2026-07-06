@@ -50,7 +50,7 @@ function Student() {
 
       <p>Email: {student.email}</p>
       <p>GPA: {student.gpa}</p>
-      <p>Campus: {student.campus?.name || student.campusName || "Not enrolled"}</p>
+      <p>Campus: {student.campus?.name || "Not enrolled"}</p>
 
       <div className="mt-6 flex flex-wrap gap-4">
         <Link
