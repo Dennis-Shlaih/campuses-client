@@ -12,7 +12,7 @@ function Home() {
       <Link to="/students" className="text-blue-600 hover:underline">
         View Students
       </Link>
-      <Link to="/campuses" className="ml-4 text-blue-600 hover:underline">View Campuses
+      <Link to="/campuses" className="ml-4 text-blue-600 hover:underline">View Campuses {/*this just creates a link to view the campusese section using the Link imported property which then takes you to the campuses page ofcourse with styling fo the actual wording on the link */}
       </Link>
     </section>
   );
