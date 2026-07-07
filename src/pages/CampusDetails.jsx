@@ -14,15 +14,15 @@ function CampusDetails(){ //creating the campusdetails function
 
     const{data: campus, isLoading, isError, error} = useQuery({ // destructor these are the values that will replace some of the names of the existing headers so that we can pull out that information
     queryKey:["campus",id], queryFn:()=>getCampus(id), //these are the paremeters for the useQuery function which allows the backend to peak in to the front end via front end request while of course changing names and getting ids, along with functions in the paramters that were using
-    })
+    })//use query calls getCampus(id(which gets the backend info)), then it returns the data to useQuery who stores it itself in its own object which btw is the frontend copy of the backend were always talking about and this is the data that goes back to the destructor values to be filled
 
     const deleteMutation = useMutation({//here we declare deleteMutation to be the holder of these functions, first UseMutation( which has access the abilit to call the backend first we rename the mutationFn to the deleteCampus() function with param id only no other possible, and on success built in to useMutation to be used after success of the first function, 
         mutationFn: () =>deleteCampus(id), onSuccess:()=>{ //on success holds multiple functions first function is like the function manager of the backend or the front ends copy of it, and it calls invalidateQueries which deletes the values that we call in the first 
             queryClient.invalidateQueries({ queryKey: ["campuses"] }) //first we have the manager of the queryclient allow us to use querykey because we need to speak the array language when asking to make something in the copy of the front end stale, so that the front can be refreshed. 
             queryClient.invalidateQueries({ queryKey: ["students"] }) //same idea front end students part becomes stale then refreshed on success of course upating the front end all possible because of the array structure that we enforced with query for the tanstake
             navigate("/campuses")// this is a funciton by react and its purpose is to send the user to another page in this case /campuses ofcourse on success
-        },
-    })
+        },//the queryclient lines only run if their is a front end copy that was stored in useQuery if not these lines are useless. but the function still runs
+    })//mutationFn runs campus(id) sends delete request once confirmed no copy was needed here then it runs on success.
 
     const unenrollMutation = useMutation({// this is similar to the above code in where we use unenroll variable to call multiple functions starting with use mutation which allows us to work in the backend a little indirectly
         //MutationFn is basically the function name because student would be the name of the function then we use the update student function with no new parameters, followed by the onsuccess feature that useMutation and this is what deletes the backend data 
@@ -34,7 +34,7 @@ function CampusDetails(){ //creating the campusdetails function
         },
     })
 
-    function handleDelete(){ // creates the function handle delete
+    function handleDelete(){ // creates the function handle delete //window has built in feature thats why we use it.
         //creates the should delete variables that uses the window function that allows for access to the browswer page then it uses the comfirm function to allow for a pop up like comfirming that you want to do an action
         const shouldDelete = window.confirm("Delete this campus? Students should now become unenrolled.")
         if(shouldDelete){
